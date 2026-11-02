@@ -120,12 +120,29 @@ function ajouterProduit(event) {
 // FONCTIONS À COMPLÉTER — aucune solution n'est fournie ci-dessous.
 
 function modifierStatut(id) {
+for (let i = 0; i < produits.length; i++) {
+  if(produits[i].id === id){
+    if(produits[i].statut === "À acheter"){
+      produits[i].statut = "Acheté"
+    }else if(produits[i].statut === "Acheté"){
+      produits[i].statut = "À acheter"
+    }
+  }
+}
+actualiserAffichage()
+console.log(produits)
   // TODO : changer uniquement le statut du bon produit dans les deux sens.
   // Le nom, le prix et l'id ne changent pas.
   // Mettre à jour la sauvegarde et l'affichage selon les critères actifs.
 }
 
 function supprimerProduit(id) {
+  for (let i = 0; i <= produits.length-1  ; i++) {
+    if(produits[i].id === id){
+      produits.splice(i,1)
+    }
+  }
+  actualiserAffichage()
   // TODO : demander confirmation et retirer uniquement le bon produit.
   // Mettre à jour la sauvegarde et l'affichage si la suppression est confirmée.
 }
@@ -140,16 +157,25 @@ function appliquerCriteres() {
 }
 
 function reinitialiserCriteres() {
+  document.getElementById("recherche").value = ""
+  document.getElementById("filtre-statut").value = "tous"
+  document.getElementById("tri-prix").value = "initial"
   // TODO : vider la recherche, sélectionner tous les produits et l'ordre initial.
   // Actualiser l'affichage, sans modifier les produits ni leur sauvegarde.
 }
 
 function sauvegarderProduits() {
+//   if(!localStorage.getItem("data")){
+//   localStorage.setItem("data",JSON.stringify(produits))
+// }
   // TODO : sauvegarder le tableau complet produits dans localStorage.
   // Cette fonction est déjà appelée après un ajout.
 }
 
 function chargerProduits() {
+  // produits=JSON.parse(localStorage.getItem("data"))
+  
+  // console.log(produits)
   // TODO : récupérer la sauvegarde dans produits si elle existe.
   // En l'absence de sauvegarde, conserver les données initiales.
   // Une sauvegarde contenant [] doit rester une liste vide.
